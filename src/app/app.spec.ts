@@ -1,10 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { App } from './app';
+import { ProductService } from './services/product.service';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [{ provide: ProductService, useValue: { getProducts: () => of([]) } }],
     }).compileComponents();
   });
 
@@ -18,6 +21,6 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, mini-productos-angular');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Mini Productos');
   });
 });
